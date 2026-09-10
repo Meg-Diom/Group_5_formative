@@ -1,0 +1,233 @@
+import data_store 
+import processing  
+import validation 
+
+data = data_store.load_data()
+transactions = data["transactions"]
+while True:
+    print(40*"-")
+    print("===== PERSONAL BUDGET TRACKER =====")
+    print(40*"-")
+    print("1. Add expense\n2. View expense\n3. Update expense\n4. Delete expense")
+    print("5. Search expense\n6. Show total expense\n7. Show expense by category\n8. Exit")
+    option = input("Enter your option: ")
+    if option == "1":
+        while True:
+            user_id = input("Enter your user ID: ")
+            user_id = validation.validate_user_id(user_id)
+            if user_id is not None:
+                break
+            print("This field can not be empty!")
+        while True:
+            user_name = input("Enter your user name: ")
+            user_name = validation.validate_user_name(user_name)
+            if user_name is not None:
+                break
+            print("This field can not be empty!")
+        while True:
+            spending_category = input("Enter the spending category: ")
+            spending_category = validation.validate_spending_category(spending_category)
+            if spending_category is not None:
+                break
+            print("This field can not be empty!")
+        while True:
+            amount = input("Enter amount: ")
+            amount = validation.validate_amount(amount)
+            if amount is not None:
+                break
+            print("Amount must be a valid number!")
+        while True:
+            date = input("Enter the date of the transaction in this format (dd/mm/yyyy): ")
+            date = validation.validate_date(date)
+            if date is not None:
+                break
+            print("Field can not be empty and must have a valid date(dd/mm/yyyy)!")
+        while True:
+            description = input("Enter your description: ")
+            description = validation.validate_description(description)
+            if description is not None:
+                break
+            print("This field can not be empty!")
+
+        transactions = processing.add_an_expense(transactions, user_id, user_name, spending_category, amount, date, description)
+
+        data["transactions"] = transactions
+        data_store.save_data(data)
+
+        print("Expense added successfully!")
+
+    elif option == "2":
+
+        if transactions:
+            print("\n===== ALL EXPENSES =====")
+            for transaction in transactions:
+                print(transaction)
+        else:
+            print("No expenses found!")
+
+    elif option == "3":
+        while True:
+            user_id = input("Enter your user ID: ")
+            user_id = validation.validate_user_id(user_id)
+            if user_id is not None:
+                break
+            print("This field can not be empty!")
+        while True:
+            spending_category = input("Enter the spending category: ")
+            spending_category = validation.validate_spending_category(spending_category)
+            if spending_category is not None:
+                break
+            print("This field can not be empty!")
+        while True:
+            amount = input("Enter amount: ")
+            amount = validation.validate_amount(amount)
+            if amount is not None:
+                break
+            print("Amount must be a valid number!")
+        results = processing.find_transaction(transactions, user_id, spending_category,amount)
+
+        if not results:
+            print("Transaction not found!")
+        else: 
+            for transaction in results:
+                print(transaction)
+            print("1. Update user ID")
+            print("2. Update user name")
+            print("3. Update spending category")
+            print("4. Update amount")
+            print("5. Update date")
+            print("6. Update description")
+            field = input("Enter the field you want to update: ")
+            if field == "1":
+                while True:
+                    modify = input("Enter new user ID: ")
+                    modify = validation.validate_user_id(modify)
+                    if modify is not None:
+                        break
+                    print("This field can not be empty!")
+            elif field == "2":
+                while True:
+                    modify = input("Enter your user name: ")
+                    modify = validation.validate_user_name(modify)
+                    if modify is not None:
+                        break
+                    print("This field can not be empty!")
+            elif field == "3":
+                while True:
+                    modify = input("Enter the spending category: ")
+                    modify = validation.validate_spending_category(modify)
+                    if modify is not None:
+                        break
+                    print("This field can not be empty!")
+            elif field == "4":
+                while True:
+                    modify = input("Enter amount: ")
+                    modify = validation.validate_amount(modify)
+                    if modify is not None:
+                        break
+                    print("Amount must be a valid number!")
+            elif field == "5":
+                while True:
+                    modify = input("Enter the date of the transaction in this format (dd/mm/yyyy): ")
+                    modify = validation.validate_date(modify)
+                    if modify is not None:
+                        break
+                    print("Field can not be empty and must have a valid date(dd/mm/yyyy)!")
+            elif field == "6":
+                while True:
+                    modify = input("Enter your description: ")
+                    modify = validation.validate_description(modify)
+                    if modify is not None:
+                        break
+                    print("This field can not be empty!")
+            else:
+                print("Invalid field!")
+                modify = None
+            if modify is not None:
+                transactions = processing.update_an_expense(
+                    transactions,
+                    user_id,
+                    spending_category,
+                    amount,
+                    field,
+                    modify
+                )
+
+                data["transactions"] = transactions
+                data_store.save_data(data)
+                print("Expense updated successfully!")
+    elif option == "4":
+        while True:
+            user_id = input("Enter your user ID: ")
+            user_id = validation.validate_user_id(user_id)
+            if user_id is not None:
+                break
+            print("This field can not be empty!")
+
+        while True:
+            spending_category = input("Enter the spending category: ")
+            spending_category = validation.validate_spending_category(
+                spending_category
+            )
+            if spending_category is not None:
+                break
+            print("This field can not be empty!")
+
+        while True:
+            amount = input("Enter amount: ")
+            amount = validation.validate_amount(amount)
+            if amount is not None:
+                break
+            print("Amount must be a valid number!")
+
+        results = processing.find_transaction(transactions, user_id, spending_category, amount)
+
+        if not results:
+            print("Transaction not found!")
+        else:
+            for transaction in results:
+                print(transaction)
+            transactions = processing.delete_an_expense(transactions, user_id, spending_category, amount)
+            data["transactions"] = transactions
+            data_store.save_data(data)
+
+            print("Expense deleted successfully!")
+
+    elif option == "5":
+        while True:
+            user_id = input("Enter your user ID: ")
+            user_id = validation.validate_user_id(user_id)
+            if user_id is not None:
+                break
+            print("This field can not be empty!")
+        results = processing.search_expenses(transactions, user_id)
+        if results:
+            print("\n===== EXPENSES FOUND =====")
+            for transaction in results:
+                print(transaction)
+        else:
+            print("No expenses found for this user!")
+
+    elif option == "6":
+
+        total = processing.calculate_total_expenses(transactions)
+
+        print("Total expenses: {:.2f}".format(total))
+
+    elif option == "7":
+
+        categories = processing.expenses_by_category(transactions)
+
+        if categories:
+            print("\n===== EXPENSES BY CATEGORY =====")
+
+            for category, total in categories.items():
+                print("{}: {:.2f}".format(category, total))
+        else:
+            print("No expenses found!")
+
+    elif option == "8":
+        break
+
+    else:
+        print("Invalid input!")
