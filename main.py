@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Personal Budget Tracker CLI
 
 This module provides the command-line interface for a simple personal
