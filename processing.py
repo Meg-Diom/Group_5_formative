@@ -31,6 +31,13 @@ def search_expenses(transactions, user_id):
 
     return results
 
+def find_transaction(transactions, user_id, spending category, amountt):
+    result = []
+    for transaction in transactions:
+        if transaction["user_id"] == user_id and transaction["spending_category"] == spending_category and transaction["amount"] == amount:
+            result.append(transaction)
+    return result
+
 def view_all_expenses(transactions, user_id):
     """
     view_all_expense function displays the list of all transactions searched by the category
@@ -102,9 +109,67 @@ def calculate_total_expenses(transactions):
         total = total + transaction["amount"]
     return total
 
-def find_transaction(transactions, user_id, spending_category, amount):
-    result = []
-    for transaction in transactions:
-        if transaction["user_id"] == user_id and transaction["spending_category"] == spending_category and transaction["amount"] == amount:
-            result.append(transaction)
-    return result
+ef add_saving_goal(saving_goals, user_id, goal, target_amount,
+                    saved_amount, deadline):
+
+    new_goal = {
+        "user_id": user_id,
+        "goal": goal,
+        "target_amount": target_amount,
+        "saved_amount": saved_amount,
+        "deadline": deadline
+    }
+
+    saving_goals.append(new_goal)
+
+    return saving_goals
+
+def find_saving_goal(saving_goals, user_id, goal):
+    results = []
+
+    for saving_goal in saving_goals:
+        if (saving_goal["user_id"] == user_id
+                and saving_goal["goal"] == goal):
+            results.append(saving_goal)
+
+    return results
+
+def delete_saving_goal(saving_goals, user_id, goal):
+
+    results = find_saving_goal(saving_goals, user_id, goal)
+
+    for saving_goal in results:
+        saving_goals.remove(saving_goal)
+
+    return saving_goals
+
+def update_saving_goal(saving_goals, user_id, goal, field, modify):
+
+    results = find_saving_goal(saving_goals, user_id, goal)
+
+    field_names = {
+        "1": "goal",
+        "2": "target_amount",
+        "3": "saved_amount",
+        "4": "deadline"
+    }
+
+    field_name = field_names.get(field)
+
+    if field_name is not None:
+        for saving_goal in results:
+            saving_goal[field_name] = modify
+
+    return saving_goals
+
+def calculate_saving_progress(saving_goals):
+
+    results = []
+
+    for saving_goal in saving_goals:
+
+        progress = (saving_goal["saved_amount"] / saving_goal["target_amount"]) * 100
+
+        results.append({"goal": saving_goal["goal"], "progress": progress})
+
+    return results
