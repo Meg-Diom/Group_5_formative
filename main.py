@@ -297,7 +297,7 @@ def main():
 
                 # categories is expected to be a mapping: {category: total_amount}
                 for category, total in categories.items():
-                    print("{}: {:.2f}".format(category, total))
+                    print("{}: {}".format(category, total))
             else:
                 print("No expenses found!")
         
