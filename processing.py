@@ -90,7 +90,7 @@ def expenses_by_category(transactions):
 
     for transaction in transactions:
         category = transaction["spending_category"]
-        amount = transaction["amount"]
+        amount = float(transaction["amount"])
 
         if category in categories:
             categories[category] += amount
@@ -127,7 +127,8 @@ def find_saving_goal(saving_goals, user_id, goal):
     results = []
 
     for saving_goal in saving_goals:
-        if (saving_goal["user_id"] == user_id and saving_goal["goal"] == goal):
+        if (saving_goal["user_id"] == user_id
+                and saving_goal["goal"] == goal):
             results.append(saving_goal)
 
     return results
