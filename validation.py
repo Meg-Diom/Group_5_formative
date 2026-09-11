@@ -54,3 +54,14 @@ def validate_goal(goal):
         return None
 
     return goal
+
+def validate_target_amount(amount):
+    try:
+        amount = float(amount)
+    except ValueError:
+        return None
+
+    if amount <= 0:
+        return None
+
+    return amount
