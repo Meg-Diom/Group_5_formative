@@ -55,7 +55,3 @@ Group_5_formative/
 ## Authors
 
 - Group 5 Team
-
-## License
-
-See LICENSE file for details.
