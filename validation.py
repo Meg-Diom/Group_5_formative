@@ -46,3 +46,11 @@ def validate_description(description):
     if description.strip() == "":
         return None
     return description.strip()
+
+def validate_goal(goal):
+    goal = goal.strip()
+
+    if goal == "":
+        return None
+
+    return goal
