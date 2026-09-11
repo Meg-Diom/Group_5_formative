@@ -517,10 +517,10 @@ def main():
                       break
               else:
                   print("Invalid option!")
-    elif option == "9":
-        break
-    else:
-        print("Invalid input!")
+        elif option == "9":
+            break
+        else:
+            print("Invalid input!")
 
 
 if __name__ == "__main__":
