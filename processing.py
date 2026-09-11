@@ -62,7 +62,7 @@ def update_an_expense(transactions, user_id, spending_category, amount, field, m
     fields = field_names.get(field)
     if fields is not None:
         for transaction in results:
-                transaction[field] = modify
+                transaction[fields] = modify
     return transactions
 
 def delete_an_expense(transactions, user_id, spending_category, amount):
@@ -74,7 +74,7 @@ def delete_an_expense(transactions, user_id, spending_category, amount):
             transactions.remove(transaction)
     return transactions
 
-def ecxpenses_by_category(transactions):
+def expenses_by_category(transactions):
     """
     Search expense by category searches an expense based on the specific filed and value 
     specified.  
