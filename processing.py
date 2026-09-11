@@ -109,8 +109,7 @@ def calculate_total_expenses(transactions):
         total = total + transaction["amount"]
     return total
 
-ef add_saving_goal(saving_goals, user_id, goal, target_amount,
-                    saved_amount, deadline):
+def add_saving_goal(saving_goals, user_id, goal, target_amount, saved_amount, deadline):
 
     new_goal = {
         "user_id": user_id,
