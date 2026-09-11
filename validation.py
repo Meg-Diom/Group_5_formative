@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
 
-"""
-Vlaidation module has functions such as validate_amount to validate the amount,
-validate_user_id to validate the user id, validate_user_name to validate user name,
-validate_spending_category, tovalidate category, validate_date, to validate the date
-to a particular date format, validate_description, sothat it doesn't take empty spaces and
-invalid inputs, validate_goal, to reject empty spaces and validate_target_amount to validate
-the target amount
-"""
+# Validation module with functions to validate user inputs: amount, user_id, user_name, 
+# spending_category, date, description, goal, and target_amount
 
 from datetime import datetime
 
+# Validates amount as a float value
 def validate_amount(amount):
     try:
         amount = float(amount)
@@ -19,6 +14,7 @@ def validate_amount(amount):
 
     return amount
 
+# Validates user_id by stripping whitespace and converting to lowercase
 def validate_user_id(user_id):
     if user_id.strip() == "":
         return 
@@ -26,6 +22,7 @@ def validate_user_id(user_id):
     return user_id.strip().lower()
 
 
+# Validates user_name to only contain alphabetic characters and spaces
 def validate_user_name(user_name):
 
     name = []
@@ -39,11 +36,13 @@ def validate_user_name(user_name):
     return "".join(name)
 
 
+# Validates spending_category is not empty
 def validate_spending_category(spending_category):
     if spending_category.strip() == "":
         return None
     return spending_category
 
+# Validates date format is dd/mm/yyyy
 def validate_date(date):
     if date.strip() == "":
         return None
@@ -53,11 +52,13 @@ def validate_date(date):
     except ValueError:
         return None
 
+# Validates description is not empty
 def validate_description(description):
     if description.strip() == "":
         return None
     return description.strip()
 
+# Validates goal is not empty after stripping whitespace
 def validate_goal(goal):
     goal = goal.strip()
 
@@ -66,6 +67,7 @@ def validate_goal(goal):
 
     return goal
 
+# Validates target_amount is a float and greater than 0
 def validate_target_amount(amount):
     try:
         amount = float(amount)
