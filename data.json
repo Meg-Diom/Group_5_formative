@@ -1,0 +1,29 @@
+{
+    "transactions": [
+        {
+            "user_id": "123",
+            "user_name": "frank",
+            "spending_category": "shoes",
+            "amount": 1234.0,
+            "date": "11/10/2026",
+            "description": "shoes"
+        },
+        {
+            "user_id": "kkjjh",
+            "user_name": "bgggfg",
+            "spending_category": "shoes",
+            "amount": 1234.0,
+            "date": "11/09/2026",
+            "description": "shoes"
+        }
+    ],
+    "saving_goals": [
+        {
+            "user_id": "1234",
+            "goal": "1000",
+            "target_amount": 1000.0,
+            "saved_amount": 158.0,
+            "deadline": "11/09/2026"
+        }
+    ]
+}
