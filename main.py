@@ -12,13 +12,12 @@ persistence, processing and validation logic:
 
 The program displays a menu and allows the user to add, view, update,
 delete and search expenses, as well as view totals and category totals.
-The program also displays a munu for managing saving goals
+The program also displays a menu for managing saving goals
 
 Usage:
     python main.py
 
-Note: The file keeps the original CLI behaviour and only wraps it in a
-`main()` function so it can be imported without running immediately.
+
 """
 
 import data_store
