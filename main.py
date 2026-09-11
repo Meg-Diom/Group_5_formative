@@ -1,41 +1,14 @@
 #!/usr/bin/env python3
-"""Personal Budget Tracker CLI
-
-This module provides the command-line interface for a simple personal
-budget tracker. It relies on the following modules which handle
-persistence, processing and validation logic:
-
-- data_store: load_data() and save_data() for loading/saving transactions
-- processing: functions for adding, finding, updating, deleting and
-  aggregating transactions
-- validation: input validation helpers
-
-The program displays a menu and allows the user to add, view, update,
-delete and search expenses, as well as view totals and category totals.
-The program also displays a menu for managing saving goals
-
-Usage:
-    python main.py
-
-
-"""
+# Personal Budget Tracker CLI with command-line interface
+# Relies on: data_store (load/save), processing (transaction logic), validation (input validation)
 
 import data_store
 import processing
 import validation
 
 
+# Run the Personal Budget Tracker CLI with interactive menu for managing expenses and saving goals
 def main():
-    """Run the Personal Budget Tracker command-line interface.
-
-    The function loads stored transactions, displays an interactive menu
-    and reacts to user choices to add, list, update, delete and search
-    expenses. All user input is validated using helpers from the
-    `validation` module and changes are persisted through `data_store`.
-
-    There are no parameters and the function returns None. It runs an
-    infinite loop until the user chooses the "Exit" option.
-    """
 
     # Load persisted data (creates a dict with a "transactions" list)
     data = data_store.load_data()
@@ -302,7 +275,7 @@ def main():
                 print("No expenses found!")
         
         elif option == "8":
-        #Option 8 : Provides an inteface for the  user to track their saving goals and display the saving progress
+        # Option 8: Interface for user to track saving goals and display saving progress
           while True:
   
               print("\n===== SAVING GOALS =====")
@@ -462,7 +435,7 @@ def main():
                           print("Saving goal updated successfully!")
   
   
-              elif goal_option == "4":
+               elif goal_option == "4":
   
                   while True:
                       user_id = input("Enter your user ID: ")
@@ -491,7 +464,7 @@ def main():
                       print("Saving goal deleted successfully!")
   
   
-              elif goal_option == "5":
+               elif goal_option == "5":
   
                   if not saving_goals:
                       print("No saving goals found!")
@@ -513,10 +486,10 @@ def main():
                           print("-" * 30)
   
   
-              elif goal_option == "6":
+               elif goal_option == "6":
                       break
-              else:
-                  print("Invalid option!")
+               else:
+                   print("Invalid option!")
         elif option == "9":
             break
         else:
