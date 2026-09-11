@@ -1,6 +1,9 @@
-from datetime import datetime
+from datetime import  datetime
 
 def validate_amount(amount):
+    """
+    Validate and convert an expense amount.
+    """
     try:
         amount = float(amount)
     except ValueError:
@@ -9,6 +12,7 @@ def validate_amount(amount):
     return amount
 
 def validate_user_id(user_id):
+    """ validate user ID."""
     if user_id.strip() == "":
         return None
     
@@ -16,7 +20,7 @@ def validate_user_id(user_id):
 
 
 def validate_user_name(user_name):
-
+    """ Validate a user's name. The name may contain only alphabetic characters and spaces."""
     name = []
 
     for i in user_name:
@@ -29,11 +33,13 @@ def validate_user_name(user_name):
 
 
 def validate_spending_category(spending_category):
+    """ Validate  an expense category. """
     if spending_category.strip() == "":
         return None
     return spending_category
 
 def validate_date(date):
+    """ Validate the transaction date."""
     if date.strip() == "":
         return None
     try:
@@ -43,6 +49,7 @@ def validate_date(date):
         return None
 
 def validate_description(description):
+    """ Validate a transaction description."""
     if description.strip() == "":
         return None
     return description.strip()
