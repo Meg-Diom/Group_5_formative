@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
+# Adds a new expense transaction with user info, category, amount, date, and description
 def add_an_expense(transactions, user_id, user_name, spending_category, amount, date, description):
-    """
-    This function, add_an_expense, when called will collect information such as the user_id,
-    user_name, spending_category, spending details, amount, date and descriptions from the user
-    and save it in a json file.
-    """
     new_transaction = {
         "user_id": user_id,
         "user_name": user_name,
@@ -17,13 +13,10 @@ def add_an_expense(transactions, user_id, user_name, spending_category, amount, 
     transactions.append(new_transaction)
     return transactions
 
+# Searches for expenses by user_id to avoid code duplication across the application
 def search_expenses(transactions, user_id):
-    """
-    search_expenses function is just so that we wouldn't copy/paste code multiple times.
-    Since we need to seach documents multiple times, we just write a function for that purpose.
-    """
     results = []
-    #results stores transactions that have been searched by a particular category, that is, user_id
+    # Results stores transactions filtered by user_id
 
     for transaction in transactions:
         if transaction["user_id"] == user_id:
@@ -31,6 +24,7 @@ def search_expenses(transactions, user_id):
 
     return results
 
+# Finds a specific transaction by user_id, spending_category, and amount
 def find_transaction(transactions, user_id, spending_category, amount):
     result = []
     for transaction in transactions:
@@ -38,11 +32,8 @@ def find_transaction(transactions, user_id, spending_category, amount):
             result.append(transaction)
     return result
 
+# Displays all transactions for a given user_id
 def view_all_expenses(transactions, user_id):
-    """
-    view_all_expense function displays the list of all transactions searched by the category
-    user_id. 
-    """
 
     results = search_expenses(transactions, user_id)
     
@@ -51,12 +42,8 @@ def view_all_expenses(transactions, user_id):
     for result in results:
         print(f"{25*"="}\nTRANSACTION HISTORY\n{25*"="} {result}\n{25*"="}")
 
+# Updates a specific transaction field searched by user_id, spending_category, and amount
 def update_an_expense(transactions, user_id, spending_category, amount, field, modify):
-    """
-    update_an_expence updates a specific transaction searched by two categories. user_id
-    and spending datails. The use of the two categories is so that we can find a specific 
-    expence and update it. 
-    """
     results = find_transaction(transactions, user_id, spending_category, amount)
     field_names = {
         "1": "user_id",
@@ -72,20 +59,16 @@ def update_an_expense(transactions, user_id, spending_category, amount, field, m
                 transaction[fields] = modify
     return transactions
 
+# Deletes a specific transaction using user_id, spending_category, and amount for specificity
 def delete_an_expense(transactions, user_id, spending_category, amount):
-    """delete_an_expense deletes a spcific transaction when searched using a three keys 
-    for specificity."""
     results = find_transaction(transactions, user_id, spending_category, amount)
     
     for transaction in results:
             transactions.remove(transaction)
     return transactions
 
+# Aggregates expenses by category and returns a dictionary of {category: total_amount}
 def expenses_by_category(transactions):
-    """
-    Search expense by category searches an expense based on the specific filed and value 
-    specified.  
-    """
     categories = {}
 
     for transaction in transactions:
@@ -99,16 +82,14 @@ def expenses_by_category(transactions):
 
     return categories
 
+# Calculates the total sum of all expenses
 def calculate_total_expenses(transactions):
-    """
-    total_spendings calculates the expenditure for a particular person based on their 
-    spending 
-    """
     total = 0
     for transaction in transactions: 
         total = total + float(transaction["amount"])
     return total
 
+# Adds a new saving goal with user_id, goal name, target amount, saved amount, and deadline
 def add_saving_goal(saving_goals, user_id, goal, target_amount, saved_amount, deadline):
 
     new_goal = {
@@ -123,6 +104,7 @@ def add_saving_goal(saving_goals, user_id, goal, target_amount, saved_amount, de
 
     return saving_goals
 
+# Finds saving goals matching user_id and goal name
 def find_saving_goal(saving_goals, user_id, goal):
     results = []
 
@@ -133,6 +115,7 @@ def find_saving_goal(saving_goals, user_id, goal):
 
     return results
 
+# Deletes a saving goal matching user_id and goal name
 def delete_saving_goal(saving_goals, user_id, goal):
 
     results = find_saving_goal(saving_goals, user_id, goal)
@@ -142,6 +125,7 @@ def delete_saving_goal(saving_goals, user_id, goal):
 
     return saving_goals
 
+# Updates a specific field in a saving goal (goal, target_amount, saved_amount, or deadline)
 def update_saving_goal(saving_goals, user_id, goal, field, modify):
 
     results = find_saving_goal(saving_goals, user_id, goal)
@@ -161,6 +145,7 @@ def update_saving_goal(saving_goals, user_id, goal, field, modify):
 
     return saving_goals
 
+# Calculates progress percentage for all saving goals
 def calculate_saving_progress(saving_goals):
 
     results = []
