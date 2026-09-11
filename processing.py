@@ -31,7 +31,7 @@ def search_expenses(transactions, user_id):
 
     return results
 
-def find_transaction(transactions, user_id, spending category, amountt):
+def find_transaction(transactions, user_id, spending_category, amount):
     result = []
     for transaction in transactions:
         if transaction["user_id"] == user_id and transaction["spending_category"] == spending_category and transaction["amount"] == amount:
