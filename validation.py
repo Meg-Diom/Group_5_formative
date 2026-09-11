@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+"""
+Vlaidation module has functions such as validate_amount to validate the amount,
+validate_user_id to validate the user id, validate_user_name to validate user name,
+validate_spending_category, tovalidate category, validate_date, to validate the date
+to a particular date format, validate_description, sothat it doesn't take empty spaces and
+invalid inputs, validate_goal, to reject empty spaces and validate_target_amount to validate
+the target amount
+"""
+
 from datetime import datetime
 
 def validate_amount(amount):
@@ -12,7 +21,7 @@ def validate_amount(amount):
 
 def validate_user_id(user_id):
     if user_id.strip() == "":
-        return None
+        return 
     
     return user_id.strip().lower()
 
