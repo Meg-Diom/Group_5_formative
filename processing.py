@@ -106,7 +106,7 @@ def calculate_total_expenses(transactions):
     """
     total = 0
     for transaction in transactions: 
-        total = total + transaction["amount"]
+        total = total + float(transaction["amount"])
     return total
 
 def add_saving_goal(saving_goals, user_id, goal, target_amount, saved_amount, deadline):
@@ -127,8 +127,7 @@ def find_saving_goal(saving_goals, user_id, goal):
     results = []
 
     for saving_goal in saving_goals:
-        if (saving_goal["user_id"] == user_id
-                and saving_goal["goal"] == goal):
+        if (saving_goal["user_id"] == user_id and saving_goal["goal"] == goal):
             results.append(saving_goal)
 
     return results
@@ -167,7 +166,7 @@ def calculate_saving_progress(saving_goals):
 
     for saving_goal in saving_goals:
 
-        progress = (saving_goal["saved_amount"] / saving_goal["target_amount"]) * 100
+        progress = (float(saving_goal["saved_amount"]) / float(saving_goal["target_amount"])) * 100
 
         results.append({"goal": saving_goal["goal"], "progress": progress})
 
